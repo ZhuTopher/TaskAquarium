@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/home_frag_root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context="chris.TaskAquarium.Activities.MainActivity">
+
+	<ScrollView
+		android:id="@+id/home_scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:id="@+id/home_container"
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<!--
+			<LinearLayout
+				android:id="@+id/alerts_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:background="@color/color_primary_dark">
+
+				<include layout="@layout/tasks_list"/>
+
+			</LinearLayout>
+			-->
+
+			<LinearLayout
+				android:id="@+id/pinned_tasks_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:background="@color/main_white">
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/home_pinned_title"
+					android:textSize="20dp"
+					android:textColor="@android:color/black"
+					android:textAlignment="center"/>
+
+				<include layout="@layout/tasks_list"/>
+
+			</LinearLayout>
+		</LinearLayout>
+
+	</ScrollView>
+
+	<android.support.design.widget.FloatingActionButton
+		android:id="@+id/home_fab"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentEnd="true"
+		android:layout_margin="@dimen/fab_margin"
+		app:srcCompat="@drawable/ic_add_white_24px"/>
+</RelativeLayout>

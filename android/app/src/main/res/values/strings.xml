@@ -1,0 +1,10 @@
+<resources>
+	<string name="app_name">TaskAquarium</string>
+	<string name="action_settings">Settings</string>
+	<string name="next_reminder">Next Reminder:</string>
+
+	<string name="task_card_progress_divider">/</string>
+
+	<!-- Home Fragment -->
+	<string name="home_pinned_title">Pinned Tasks</string>
+</resources>
