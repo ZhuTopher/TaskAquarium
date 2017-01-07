@@ -36,13 +36,13 @@ public class HomeFragment extends Fragment {
 		this.homeFragRoot = (RelativeLayout) inflater.inflate(R.layout.fragment_home, container, false);
 		this.homeScrollView = (ScrollView) this.homeFragRoot.findViewById(R.id.home_scroll_view);
 
-		this.alertsContainer = (LinearLayout) this.homeFragRoot.findViewById(R.id.alerts_container);
-		this.alertsRV = (RecyclerView) this.alertsContainer.findViewById(R.id.tasks_list);
-		this.alertsRV.setHasFixedSize(false);
-		this.alertsRV.setNestedScrollingEnabled(false); // allows for smooth scrollview scrolling
-		LinearLayoutManager upcomingTaskLlm = new LinearLayoutManager(getContext());
-		upcomingTaskLlm.setOrientation(LinearLayoutManager.VERTICAL);
-		this.alertsRV.setLayoutManager(upcomingTaskLlm);
+//		this.alertsContainer = (LinearLayout) this.homeFragRoot.findViewById(R.id.alerts_container);
+//		this.alertsRV = (RecyclerView) this.alertsContainer.findViewById(R.id.tasks_list);
+//		this.alertsRV.setHasFixedSize(false);
+//		this.alertsRV.setNestedScrollingEnabled(false); // allows for smooth scrollview scrolling
+//		LinearLayoutManager upcomingTaskLlm = new LinearLayoutManager(getContext());
+//		upcomingTaskLlm.setOrientation(LinearLayoutManager.VERTICAL);
+//		this.alertsRV.setLayoutManager(upcomingTaskLlm);
 
 		this.pinnedTasksContainer = (LinearLayout) this.homeFragRoot.findViewById(R.id.pinned_tasks_container);
 		this.pinnedTasksRV = (RecyclerView) this.pinnedTasksContainer.findViewById(R.id.tasks_list);
