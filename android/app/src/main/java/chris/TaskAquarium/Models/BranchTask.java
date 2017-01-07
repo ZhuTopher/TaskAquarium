@@ -15,7 +15,7 @@ public class BranchTask extends Task {
     private String description = "";
 
     // TODO: display completedTasks sorted by SubTask.completedAt
-    private Map<String, SubTask> subTasks, completedTasks = new HashMap<>();
+    private Map<String, SubTask> subTasks = new HashMap<>(), completedTasks = new HashMap<>();
     // private SubTask currentTask;
 
     public BranchTask() {

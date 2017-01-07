@@ -60,7 +60,7 @@
 			android:paddingBottom="2dp">
 
 			<TextView
-				android:id="@+id/task_subtitle"
+				android:id="@+id/task_branch_title"
 				android:layout_width="0dp"
 				android:layout_height="match_parent"
 				android:layout_weight="1"
@@ -134,6 +134,7 @@
 
 				</LinearLayout>
 
+				<!--
 				<TextView
 					android:id="@+id/task_branch_title"
 					android:layout_width="wrap_content"
@@ -153,6 +154,7 @@
 					android:paddingLeft="5dp"
 					android:paddingTop="2dp"
 					android:paddingBottom="2dp"/>
+					-->
 
 			</FrameLayout>
 		</HorizontalScrollView>

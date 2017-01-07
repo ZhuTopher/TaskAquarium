@@ -14,7 +14,7 @@ import chris.TaskAquarium.ReminderSettingEnum;
 public class MainTask extends Task {
     // TODO: Future consideration of having unbounded branches,
     //       i.e MainTask is the root node, BranchTask are children nodes?
-	private static final String DEFAULT_BRANCH_NAME = "Main";
+	public static final String DEFAULT_BRANCH_NAME = "Main";
     private static final String LOG_TAG = MainTask.class.getSimpleName();
 
 //	private ReminderSettingEnum reminderSetting;
