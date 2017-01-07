@@ -13,6 +13,20 @@ public class SubTask extends Task {
 		super(title, description);
 	}
 
+	// Implementation of Parent Task methods
+	public void setTitle(String title) {
+		super.setTitle(title);
+	}
+	public void setDescription(String description) {
+		super.setDescription(description);
+	}
+	public String getTitle() {
+		return super.getTitle();
+	}
+	public String getDescription() {
+		return super.getDescription();
+	}
+
 	public void setCompletedAt(long completedAt) {
 		this.completedAt = completedAt;
 	}

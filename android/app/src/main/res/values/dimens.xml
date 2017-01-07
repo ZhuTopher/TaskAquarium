@@ -11,11 +11,11 @@
 	<dimen name="nav_drawer_width">240dp</dimen>
 
 	<!-- Task Card dimensions -->
-	<dimen name="task_card_height">125dp</dimen>
+	<dimen name="task_card_height">150dp</dimen>
+	<dimen name="task_card_branches_max_width">150dp</dimen>
 
 	<dimen name="task_title_font_size">20sp</dimen>
 	<dimen name="task_subtitle_font_size">15sp</dimen>
-	<dimen name="task_body_font_size">15sp</dimen>
 
 
 </resources>

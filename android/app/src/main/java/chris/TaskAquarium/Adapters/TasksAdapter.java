@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import chris.TaskAquarium.Models.MainTask;
 import chris.TaskAquarium.Models.Task;
 import chris.TaskAquarium.R;
 import chris.TaskAquarium.ReminderSettingEnum;
@@ -20,13 +21,13 @@ import chris.TaskAquarium.ReminderSettingEnum;
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHolder>{
 	// TODO: adapter tied to each instance of a TaskList (recyclerview) used for population/drawing
 
-	private List<Task> tasksList;
+	private List<MainTask> tasksList;
 
 	public TasksAdapter() {
 		this.tasksList = new ArrayList<>();
 	}
 
-	public TasksAdapter(List<Task> tasksList) {
+	public TasksAdapter(List<MainTask> tasksList) {
 		this.tasksList = tasksList;
 	}
 
@@ -37,13 +38,13 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
 
 	@Override
 	public void onBindViewHolder(TaskViewHolder taskViewHolder, int i) {
-		/*ContactInfo ci = contactList.get(i);
-		contactViewHolder.vName.setText(ci.name);
-		contactViewHolder.vSurname.setText(ci.surname);
-		contactViewHolder.vEmail.setText(ci.email);
-		contactViewHolder.vTitle.setText(ci.name + " " + ci.surname);*/
-
-		Task task = this.tasksList.get(i);
+		MainTask task = this.tasksList.get(i);
+		taskViewHolder.title.setText(task.getTitle());
+		taskViewHolder.subtitle.setText(task.getCurrentTask().getTitle());
+		/* TODO: implement branches for -- taskViewHolder.branchTitle.setText(...);
+		taskViewHolder.progressCurrStep.setText();
+		taskViewHolder.progressTotalSteps.setText();
+		*/
 	}
 
 	@Override
@@ -58,24 +59,16 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
 
 
 	public static class TaskViewHolder extends RecyclerView.ViewHolder {
-		// Task abstract object variables
-		private TextView title, description;
-
-		// Sub-task object variables
-		private long completedAt;
-
-		// Main-task object variables
-		private ReminderSettingEnum reminderSetting;
-		private long remindAtTime, reminderInterval; // ms?
-
-		// TODO: just use SubTasks instead of abstract Task?
-		private Task currentTask;
-		private List<Task> subTasks = new ArrayList<Task>();
-		private List<Task> completedTasks = new ArrayList<Task>();
+		// Task card views
+		private TextView title, subtitle, branchTitle, progressCurrStep, progressTotalSteps;
 
 		public TaskViewHolder(View v) {
 			super(v);
-			this.title = (TextView) v.findViewById(R.id.title);
+			this.title = (TextView) v.findViewById(R.id.task_title);
+			this.subtitle = (TextView) v.findViewById(R.id.task_subtitle);
+			this.branchTitle = (TextView) v.findViewById(R.id.task_branch_title);
+			this.progressCurrStep = (TextView) v.findViewById(R.id.task_current_step);
+			this.progressTotalSteps = (TextView) v.findViewById(R.id.task_total_steps);
 		}
 	}
 }
