@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	   android:shape="rectangle">
+	<solid
+		android:color="@color/task_card_title_bg"/>
+
+	<corners
+		android:topLeftRadius="@dimen/task_card_radius"
+		android:topRightRadius="@dimen/task_card_radius"/>
+</shape>
