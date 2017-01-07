@@ -5,7 +5,12 @@
 	<color name="color_accent">#1476b8</color>
 	<!-- alternate accent color: #309fe8 -->
 
-
 	<color name="navigation_drawer_div">#4444</color>
 	<color name="main_white">#ffff</color>
+
+	<!-- Task Card Colors -->
+	<color name="task_card_title_bg">#1476b8</color>
+	<color name="task_card_branch_title_bg">#135886</color>
+	<color name="task_card_branches_bg">#ffff</color>
+
 </resources>

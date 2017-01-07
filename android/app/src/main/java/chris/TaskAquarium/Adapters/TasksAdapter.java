@@ -1,5 +1,8 @@
 package chris.TaskAquarium.Adapters;
 
+import android.os.Build;
+import android.support.v7.appcompat.BuildConfig;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +73,8 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
 	}
 
     public boolean isTaskTitleAvailable(String taskTitle) {
+        taskTitle = taskTitle.trim();
+
         for (MainTask task : tasksList) {
             if (task.getTitle().equalsIgnoreCase(taskTitle)) {
                 return false;

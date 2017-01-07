@@ -69,6 +69,8 @@ public class MainTask extends Task {
     // Implementation methods
 
     public boolean addBranch(String branchTitle) {
+        branchTitle = branchTitle.trim();
+
         if (this.branches.containsKey(branchTitle)) {
             Log.w(LOG_TAG, String.format("Didn't add branch with title %s: already exists", branchTitle));
             return false;
@@ -79,6 +81,8 @@ public class MainTask extends Task {
     }
 
     public boolean removeBranch(String branchTitle) {
+        branchTitle = branchTitle.trim();
+
         if (this.branches.containsKey(branchTitle)) {
             if (this.currentBranch.getTitle().equals(branchTitle)) {
                 Log.d(LOG_TAG, String.format("Removing current branch with title %s", branchTitle));
@@ -94,6 +98,8 @@ public class MainTask extends Task {
     }
 
     public boolean setCurrentBranch(String branchTitle) {
+        branchTitle = branchTitle.trim();
+
         if (this.branches.containsKey(branchTitle)) {
             this.currentBranch = this.branches.get(branchTitle);
             return true;

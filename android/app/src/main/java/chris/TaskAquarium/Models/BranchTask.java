@@ -56,7 +56,9 @@ public class BranchTask extends Task {
 
     // Implementation Methods
 
-    public boolean addSubTask(String subTaskTitle)  {
+    public boolean addSubTask(String subTaskTitle) {
+        subTaskTitle = subTaskTitle.trim();
+
         if (this.subTasks.containsKey(subTaskTitle) ||
                 this.completedTasks.containsKey(subTaskTitle)) {
             Log.w(LOG_TAG, String.format("Didn't add subtask with title %s: already exists", subTaskTitle));
@@ -68,6 +70,8 @@ public class BranchTask extends Task {
     }
 
     public boolean removeSubTask(String subTaskTitle) {
+        subTaskTitle = subTaskTitle.trim();
+
         if (this.subTasks.containsKey(subTaskTitle)) {
             /*if (this.currentTask.getTitle().equals(subTaskTitle)) {
                 Log.d(LOG_TAG, String.format("Removing current subtask with title %s", subTaskTitle));
@@ -83,6 +87,8 @@ public class BranchTask extends Task {
     }
 
     public boolean removeCompletedTask(String subTaskTitle) {
+        subTaskTitle = subTaskTitle.trim();
+
         if (this.completedTasks.containsKey(subTaskTitle)) {
             this.completedTasks.remove(subTaskTitle);
             return true;
@@ -93,6 +99,8 @@ public class BranchTask extends Task {
     }
 
     public boolean completeSubTask(String subTaskTitle) {
+        subTaskTitle = subTaskTitle.trim();
+
         if (this.subTasks.containsKey(subTaskTitle)) {
             SubTask completedTask = subTasks.get(subTaskTitle);
             completedTask.setCompletedAt(System.currentTimeMillis());
@@ -110,6 +118,8 @@ public class BranchTask extends Task {
     }
 
     /*public boolean setCurrentTask(String subTaskTitle) {
+        subTaskTitle = subTaskTitle.trim();
+
         if (this.subTasks.containsKey(subTaskTitle)) {
             this.currentTask = this.subTasks.get(subTaskTitle);
             return true;
