@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
 			taskViewHolder.progressCurrStep.setText(String.valueOf(task.getCurrentBranch().getNumCompletedTasks()));
 			taskViewHolder.progressTotalSteps.setText(String.valueOf(task.getCurrentBranch().getNumTotalTasks()));
 		} else { // TODO: need to assign default branch if there is none, choose most close to completion?
-			taskViewHolder.branchTitle.setVisibility(View.GONE);
+			taskViewHolder.branchTitleContainer.setVisibility(View.GONE);
 		}
 	}
 
@@ -84,11 +85,14 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
 		// Task card views
 		private TextView title, subtitle, branchTitle, progressCurrStep, progressTotalSteps;
 
+        private LinearLayout branchTitleContainer;
+
 		public TaskViewHolder(View v) {
 			super(v);
 			this.title = (TextView) v.findViewById(R.id.task_title);
 //			this.subtitle = (TextView) v.findViewById(R.id.task_subtitle);
 			this.branchTitle = (TextView) v.findViewById(R.id.task_branch_title);
+            this.branchTitleContainer = (LinearLayout) v.findViewById(R.id.task_branch_title_container);
 			this.progressCurrStep = (TextView) v.findViewById(R.id.task_current_step);
 			this.progressTotalSteps = (TextView) v.findViewById(R.id.task_total_steps);
 		}
