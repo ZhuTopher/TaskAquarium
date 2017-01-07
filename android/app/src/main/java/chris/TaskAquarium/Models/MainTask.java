@@ -1,7 +1,9 @@
 package chris.TaskAquarium.Models;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.util.Log;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import chris.TaskAquarium.ReminderSettingEnum;
 
@@ -10,108 +12,98 @@ import chris.TaskAquarium.ReminderSettingEnum;
  */
 
 public class MainTask extends Task {
-	private ReminderSettingEnum reminderSetting;
-	private long remindAtTime, reminderInterval; // ms?
+    // TODO: Future consideration of having unbounded branches,
+    //       i.e MainTask is the root node, BranchTask are children nodes?
+	private static final String DEFAULT_BRANCH_NAME = "Main";
+    private static final String LOG_TAG = MainTask.class.getSimpleName();
 
-	// TODO: just use SubTasks instead of abstract Task?
-	private SubTask currentTask;
-	private List<SubTask> subTasks = new ArrayList<>();
-	private List<SubTask> completedTasks = new ArrayList<>();
+//	private ReminderSettingEnum reminderSetting;
+//	private long remindAtTime, reminderInterval; // ms?
 
-	public MainTask(String title, String description) {
-		super(title, description);
+	private Map<String, BranchTask> branches = new HashMap<>();
+    private BranchTask currentBranch;
 
-		// always use currentTask for displaying info, not MainTask.getTitle() and etc.
-		this.currentTask = new SubTask(title, description);
+	public MainTask() {
+		this(Task.DEFAULT_NO_TITLE);
+	}
+
+	public MainTask(String title) {
+		super(title);
+
+		this.branches.put(MainTask.DEFAULT_BRANCH_NAME, new BranchTask(MainTask.DEFAULT_BRANCH_NAME));
+        this.currentBranch = this.branches.get(MainTask.DEFAULT_BRANCH_NAME);
 	}
 
 	// Implementation of Parent Task methods
 	public void setTitle(String title) {
 		super.setTitle(title);
 	}
-	public void setDescription(String description) {
-		super.setDescription(description);
-	}
 	public String getTitle() {
 		return super.getTitle();
 	}
-	public String getDescription() {
-		return super.getDescription();
-	}
 
-	public void setReminderSetting(ReminderSettingEnum reminderSetting) {
-		this.reminderSetting = reminderSetting;
-	}
+//	public void setReminderSetting(ReminderSettingEnum reminderSetting) {
+//		this.reminderSetting = reminderSetting;
+//	}
+//
+//	protected void setRemindAtTime(long remindAtTime) {
+//		this.remindAtTime = remindAtTime;
+//	}
+//
+//	public void setReminderInterval(long reminderInterval) {
+//		this.reminderInterval = reminderInterval;
+//	}
 
-	protected void setRemindAtTime(long remindAtTime) {
-		this.remindAtTime = remindAtTime;
-	}
+//	public ReminderSettingEnum getReminderSetting() {
+//		return this.reminderSetting;
+//	}
+//
+//	protected long getRemindAtTime() {
+//		return this.remindAtTime;
+//	}
+//
+//	public long getReminderInterval() {
+//		return this.reminderInterval;
+//	}
 
-	public void setReminderInterval(long reminderInterval) {
-		this.reminderInterval = reminderInterval;
-	}
+    // Implementation methods
 
-	public void setCurrentTask(SubTask currentTask) {
-		this.currentTask = currentTask;
-	}
+    public boolean addBranch(String branchTitle) {
+        if (this.branches.containsKey(branchTitle)) {
+            Log.w(LOG_TAG, String.format("Didn't add branch with title %s: already exists", branchTitle));
+            return false;
+        } else {
+            this.branches.put(branchTitle, new BranchTask(branchTitle));
+            return true;
+        }
+    }
 
-	public void setSubTasks(List<SubTask> subTasks) {
-		this.subTasks = subTasks;
-	}
+    public boolean removeBranch(String branchTitle) {
+        if (this.branches.containsKey(branchTitle)) {
+            if (this.currentBranch.getTitle().equals(branchTitle)) {
+                Log.d(LOG_TAG, String.format("Removing current branch with title %s", branchTitle));
+                this.currentBranch = null;
+            }
 
-	public void setCompletedTasks(List<SubTask> completedTasks) {
-		this.completedTasks = completedTasks;
-	}
+            this.branches.remove(branchTitle);
+            return true;
+        } else { // branch DNE
+            Log.w(LOG_TAG, String.format("Didn't remove branch with title %s: doesn't exist", branchTitle));
+            return false; // this.currentBranch unchanged
+        }
+    }
 
-	public ReminderSettingEnum getReminderSetting() {
-		return this.reminderSetting;
-	}
+    public boolean setCurrentBranch(String branchTitle) {
+        if (this.branches.containsKey(branchTitle)) {
+            this.currentBranch = this.branches.get(branchTitle);
+            return true;
+        } else {
+            Log.w(LOG_TAG, String.format("Didn't change currentBranch: branch with title %s DNE", branchTitle));
+            return false; // this.currentBranch unchanged
+        }
+    }
 
-	protected long getRemindAtTime() {
-		return this.remindAtTime;
-	}
-
-	public long getReminderInterval() {
-		return this.reminderInterval;
-	}
-
-	public SubTask getCurrentTask() {
-		return this.currentTask;
-	}
-
-	public List<SubTask> getSubTasks() {
-		return this.subTasks;
-	}
-
-	public List<SubTask> getCompletedTasks() {
-		return this.completedTasks;
-	}
-
-	// Non setter/getter methods
-
-	// TODO: move to TasksManager?
-	// NOTE: TasksList is a RecyclerView of MainTask,
-	//       each MainTask will need a RecyclerView for its subTasks list
-	public void addSubTask(SubTask newTask) {
-		this.subTasks.add(newTask);
-	}
-
-	// TODO: maybe use index instead (RecyclerView.getView() gives position)?
-	public void removeSubTask(SubTask removedTask) {
-		this.subTasks.remove(removedTask);
-	}
-
-	public void completeCurrentTask() {
-		SubTask nextTask = null;
-		if (this.subTasks.get(0) != null) {
-			nextTask = this.subTasks.get(0);
-			this.subTasks.remove(0);
-		}
-
-		this.currentTask.setCompletedAt(System.currentTimeMillis());
-		this.completedTasks.add(currentTask);
-		this.currentTask = nextTask;
-
-		// TODO: if currentTask is now null, alert completion
-	}
+    public BranchTask getCurrentBranch() {
+        return this.currentBranch;
+    }
 }

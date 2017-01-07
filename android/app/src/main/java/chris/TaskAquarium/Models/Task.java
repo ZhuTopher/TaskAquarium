@@ -4,28 +4,25 @@ package chris.TaskAquarium.Models;
  * Created by chris on 8/11/16.
  */
 
-public abstract class Task { // TODO: use as an abstract class: SubTask, MainTask (?)
-	// TODO: properly adjust accessibility of Task objects
-	private String title, description;
+public abstract class Task {
+	public static final String DEFAULT_NO_TITLE = "Missing title";
 
-	protected Task(String title, String description) {
+	// TODO: properly adjust accessibility of Task objects
+	private String title;
+
+	protected Task() {
+		this(Task.DEFAULT_NO_TITLE);
+	}
+
+	protected Task(String title) {
 		this.title = title;
-		this.description = description;
 	}
 
 	protected void setTitle(String title) {
 		this.title = title;
 	}
 
-	protected void setDescription(String description) {
-		this.description = description;
-	}
-
 	protected String getTitle() {
 		return this.title;
-	}
-
-	protected String getDescription() {
-		return this.description;
 	}
 }
